@@ -128,7 +128,7 @@ If a level can not be determined, ask the User how they want to engage using thi
 
 ## Current Status
 
-**Phase:** Testing (Implementation Complete)
+**Phase:** Complete (Testing Successful)
 
 **Completed:**
 - Agent definition created at `agent/pair-programmer.md` (487 lines with full enforcement logic)
@@ -137,18 +137,48 @@ If a level can not be determined, ask the User how they want to engage using thi
 - Project structure finalized with pfb submodule for bash utilities
 - All four levels fully defined with enforcement rules and response patterns
 - Session state tracking implemented (current_level, turn_owner, ai_code_blocks_count, explain_back_pending)
+- **Testing completed successfully across all four levels**
+- **Agent definition format fixed** (multiline description with escaped newlines and example blocks)
+- **Level 4 explain-back enforcement strengthened** (blocks file operations until user demonstrates understanding)
+- **Auto-invocation verified** (main Claude recognizes trigger patterns and launches via Task tool)
 
-**Ready for Testing:**
-The agent is fully implemented and installed. Next phase is real-world usage testing.
+**Testing Results (2026-01-08):**
+
+All four scenarios tested and validated:
+
+1. **Level Detection Test** - Agent correctly prompts user to declare level when none specified. Explains framework and requests explicit declaration.
+
+2. **Level 1 Advisory Mode Test** - Agent properly refuses to write code. Provides architectural advice, design patterns, tradeoffs only. Enforcement working correctly.
+
+3. **Level 2 Scaffolding Test** - Agent provides class structure with method signatures and TODO markers but no implementation logic. Successfully delivers scaffolding requiring human logic implementation.
+
+4. **Level 4 Explain-Back Test** - Initial test revealed weakness where agent offered file creation before explain-back. Strengthened enforcement with CRITICAL labels and explicit blocking. Retest confirmed proper blocking until user demonstrates understanding.
+
+**Critical Discovery - Agent Definition Format:**
+
+The `description` field in agent definition is meta-documentation that instructs the MAIN Claude Code agent when/how to invoke the subagent:
+
+- Must be quoted multiline string with explicit escaped newlines (`\n\n`)
+- Must include `<example>` blocks showing invocation patterns via Task tool
+- Not just documentation - it's training data for pattern recognition
+- Without proper format, agent remains invisible to main system
+
+This understanding was the breakthrough that enabled auto-invocation.
+
+**Installation Verification:**
+
+Both invocation methods confirmed working:
+- Direct launch: `claude --agent pair-programmer` (entire session in agent mode)
+- Auto-launch: Main Claude recognizes patterns like "Level 2: scaffold X" and launches automatically
 
 ## Next Steps
 
-1. **Test with Real Project:** Use the agent on an actual coding task. Test all four levels. Evaluate whether enforcement feels helpful or bureaucratic.
-2. **Gather Usage Feedback:** Document what works, what needs adjustment, where flexibility is needed vs where firmness is appropriate.
-3. **Iterate on Enforcement:** Adjust tone, prompts, and rules based on actual usage patterns and user feedback.
-4. **Evaluate Level Granularity:** Confirm four levels is the right number. Check if users naturally map tasks to levels or if any level goes unused.
-5. **Consider Public Release:** If proven valuable, add LICENSE, CONTRIBUTING.md, create GitHub remote, and release as open-source agent.
-6. **Document Best Practices:** Based on testing, document which types of projects work best with which levels.
+1. **Create Public GitHub Repository:** Set up public repo for community access and contributions.
+2. **Configure Git Remote:** Add remote origin and push committed code to GitHub.
+3. **Add GitHub Documentation:** Consider CONTRIBUTING.md, enhanced LICENSE details if needed.
+4. **Community Release:** Share agent for broader testing and feedback.
+5. **Monitor Usage Patterns:** Gather real-world usage data to inform future iterations.
+6. **Agent Directory Submission:** If Anthropic maintains an agent directory/marketplace, consider submission.
 
 ## Notes
 
