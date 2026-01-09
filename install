@@ -48,6 +48,14 @@ install_agent() {
     echo "${DIM}$(ls -lh "$HOME/.claude/agents/")${RESET}"
 
     echo ""
+
+    pfb heading "Next steps..." "🚀"
+    pfb subheading "Launch Claude Code with the pair-programmer agent using:"
+    pfb subheading "  ${BOLD}claude-code --agent pair-programmer${RESET}"
+    pfb subheading "Start your first prompt by declaring your assistance level, e.g.:"
+    pfb subheading "  ${BOLD}Level 2: Scaffold an API client class for GitHub${RESET}"
+
+    echo ""
 }
 
 source_pfb
