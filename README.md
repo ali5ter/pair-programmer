@@ -92,7 +92,7 @@ You: [explains back how every part works]
 
 ## Warning Signs of Dependency
 
-Stop and reassess if you notice:
+The Agent will stop and reassess if it notices that you:
 
 - Can't explain how AI-generated code works
 - Copying code without modification
@@ -173,25 +173,25 @@ claude --agent pair-programmer
 
 Start your first message by declaring your assistance level:
 
-```bash
+```text
 # Level 1: Pure architecture/advisory
-claude --agent pair-programmer
-> Level 1: I want to implement a rate limiter myself.
-> Just advise on algorithm choices.
+$ claude --agent pair-programmer
+"Level 1: I want to implement a rate limiter myself."
+"Just advise on algorithm choices."
 
 # Level 2: Scaffolding
-claude --agent pair-programmer
-> Level 2: Scaffold an API client class for GitHub.
-> I'll implement the request methods.
+$ claude --agent pair-programmer
+"Level 2: Scaffold an API client class for GitHub."
+"I'll implement the request methods."
 
 # Level 3: Pair programming
-claude --agent pair-programmer
-> Level 3: Let's alternate building a CLI tool.
-> I'll start with argument parsing.
+$ claude --agent pair-programmer
+"Level 3: Let's alternate building a CLI tool."
+"I'll start with argument parsing."
 
 # Level 4: Full generation (sparingly)
-claude --agent pair-programmer
-> Level 4: Generate standard Express middleware boilerplate.
+$ claude --agent pair-programmer
+"Level 4: Generate standard Express middleware boilerplate."
 ```
 
 ### Switching Agents
@@ -212,7 +212,7 @@ ls ~/.claude/agents/
 
 You can change levels during a session:
 
-```
+```text
 "Let's switch to Level 2 for this next feature."
 ```
 
