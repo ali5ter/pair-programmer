@@ -238,36 +238,6 @@ This framework is built on several principles:
 
 **Graduated resistance training.** Choose the level that maintains appropriate challenge. Too easy and you atrophy; too hard and you burn out.
 
-## Success Criteria
-
-You're using this framework successfully if:
-
-- You can explain all code in your project
-- Your debugging skills remain sharp
-- You understand trade-offs and can make architectural decisions
-- Cognitive load equals or exceeds solo coding
-- Better outcomes through collaboration vs delegation
-- You could complete the project without AI (just slower)
-
-## Implementation Notes
-
-This is a minimal framework. Start here and add complexity only when proven necessary. Avoid premature architecture.
-
-Built with:
-
-- Bash for lightweight state
-- Python when complex state management needed
-- Scriptable, transparent implementations
-- Git-aware where relevant
-
-## Meta Note
-
-Building this framework is itself a Level 2 exercise - the structure was AI-assisted, but you implement the enforcement mechanisms yourself.
-
-## License
-
-MIT - Use freely, modify as needed, share improvements.
-
 ---
 
 *Remember: The goal isn't to avoid AI. It's to use AI in a way that makes you stronger, not weaker.*
