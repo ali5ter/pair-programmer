@@ -132,16 +132,19 @@ If a level can not be determined, ask the User how they want to engage using thi
 
 ## Current Status
 
-**Phase:** Complete (Plugin Framework Migration)
+**Phase:** Complete (Plugin Framework Migration — v1.0.0 Released)
 
 **Completed:**
 
 - Migrated to Claude Code plugin framework (`pair-programmer` plugin, `coach` agent)
 - Agent ID: `pair-programmer:coach` (was `pair-programmer`)
-- Agent moved: `agent/pair-programmer.md` → `agents/coach.md`
-- Added `.claude-plugin/plugin.json`
+- Agent file: `agents/coach.md` (plugin convention)
+- Added `.claude-plugin/plugin.json` (name: `pair-programmer`, version: `1.0.0`)
+- Added `.markdownlint.json`
 - Added to `ali5ter/claude-plugins` marketplace
 - `install` script replaced with deprecation notice
+- Both `ali5ter/pair-programmer` and `ali5ter/claude-plugins` repos committed and pushed
+- GitHub release v1.0.0 tagged: <https://github.com/ali5ter/pair-programmer/releases/tag/v1.0.0>
 - Install: `/plugin marketplace add ali5ter/claude-plugins` then `/plugin install pair-programmer@ali5ter`
 - Agent definition created at `agents/coach.md` (full enforcement logic)
 - README.md written with philosophy, usage patterns, and examples
@@ -192,10 +195,10 @@ Both invocation methods confirmed working:
 
 ## Next Steps
 
-1. **Push to GitHub:** Commit and push to <https://github.com/ali5ter/pair-programmer> to make plugin installable.
-2. **Update Marketplace Cache:** Run `/plugin marketplace update ali5ter` in Claude Code after pushing.
-3. **Verify Plugin Install:** Test `plugin install pair-programmer@ali5ter` end-to-end.
-4. **Monitor Usage Patterns:** Gather real-world usage data to inform future iterations.
+1. **Monitor Usage Patterns:** Gather real-world usage data to inform future iterations.
+2. **Watch Plugin Framework Updates:** Adapt to any Anthropic plugin framework changes.
+3. **Evaluate Additional Agents:** Consider whether a `reviewer` or other role agent adds value under the `pair-programmer` plugin namespace.
+4. **Agent Directory Submission:** If Anthropic publishes an official plugin/agent directory, consider submitting.
 
 ## Notes
 
