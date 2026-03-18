@@ -1,62 +1,10 @@
 #!/usr/bin/env bash
+cat <<'EOF'
+The bash installer has been replaced by the Claude Code plugin system.
 
-# @file install
-# @brief Installation script for Claude Code pair programming Agent.
-# @author Alister Lewis-Bowen <alister@lewis-bowen.org>
+New install (run inside Claude Code):
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-AGENT_NAME="pair-programmer"
-AGENT_SOURCE="$SCRIPT_DIR/agent/${AGENT_NAME}.md"
-AGENT_DEST="$HOME/.claude/agents/${AGENT_NAME}.md"
+  /plugin marketplace add ali5ter/claude-plugins
+  /plugin install pair-programmer@ali5ter
 
-source_pfb() {
-    if [ ! -f "$SCRIPT_DIR/lib/pfb/pfb.sh" ]; then
-        echo "Initializing pfb submodule..."
-        cd "$SCRIPT_DIR" || exit
-        git submodule update --init --recursive
-    fi
-    # shellcheck disable=SC1091
-    source "$SCRIPT_DIR/lib/pfb/pfb.sh"
-}
-
-usage() {
-    pfb heading "Pair programming agent installation script" "🗂️"
-    echo ""
-    pfb subheading "Usage:"
-    echo "  $0"
-    echo ""
-    exit 1
-}
-
-install_agent() {
-    pfb heading "Installing agent" "🧠"
-
-    if [ -f "$AGENT_DEST" ]; then
-        pfb warn "Agent already exists, updating..."
-        rm -f "$AGENT_DEST"
-    fi
-    mkdir -p "$HOME/.claude/agents"
-    if ! cp -R "$AGENT_SOURCE" "$AGENT_DEST"; then
-        pfb error "Failed to copy agent"
-        exit 1
-    fi
-    pfb success "Agent installed to $AGENT_DEST"
-
-    echo ""
-
-    pfb subheading "Installed personal Claude Agents:"
-    echo "${DIM}$(ls -lh "$HOME/.claude/agents/")${RESET}"
-
-    echo ""
-
-    pfb heading "Next steps..." "🚀"
-    pfb subheading "Launch Claude Code with the pair-programmer agent using:"
-    pfb subheading "  ${BOLD}claude-code --agent pair-programmer${RESET}"
-    pfb subheading "Start your first prompt by declaring your assistance level, e.g.:"
-    pfb subheading "  ${BOLD}Level 2: Scaffold an API client class for GitHub${RESET}"
-
-    echo ""
-}
-
-source_pfb
-install_agent
+EOF

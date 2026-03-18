@@ -4,13 +4,16 @@
 
 ## The Problem
 
-AI code generation creates deceptive productivity. You ship features faster while your problem-solving muscles atrophy. As MIT professor Roberto Rigobon warns about AI dependency: "When we stop using our brains... we forget."
+AI code generation creates deceptive productivity. You ship features faster while your problem-solving muscles atrophy.
+As MIT professor Roberto Rigobon warns about AI dependency: "When we stop using our brains... we forget."
 
-"Vibe coding" - passively accepting AI-generated code - feels productive but degrades the skills that make you valuable: debugging, architecture decisions, performance intuition, and deep understanding of your codebase.
+"Vibe coding" - passively accepting AI-generated code - feels productive but degrades the skills that make you valuable:
+debugging, architecture decisions, performance intuition, and deep understanding of your codebase.
 
 ## The Solution
 
-A graduated assistance framework that maintains cognitive load while leveraging AI as a force multiplier. Think of it as weight training: you need resistance to build strength.
+A graduated assistance framework that maintains cognitive load while leveraging AI as a force multiplier. Think of it as
+weight training: you need resistance to build strength.
 
 ## Four Levels of Assistance
 
@@ -75,7 +78,8 @@ You: [modifies AI code, then writes next function]
 
 **AI writes complete implementations. Use sparingly.**
 
-Reserve for boilerplate, well-solved problems, or time-critical situations. **Mandatory explain-back**: you must explain every line before using it.
+Reserve for boilerplate, well-solved problems, or time-critical situations. **Mandatory explain-back**: you must
+explain every line before using it.
 
 ```text
 You: "Generate OAuth2 boilerplate for GitHub login"
@@ -143,30 +147,21 @@ and just need the standard pattern."
 
 ## Installation
 
-```bash
-./install
-```
+Inside Claude Code, run:
 
-Installs the agent to `~/.claude/agents/pair-programmer.md` and integrates with Claude Code CLI.
+```text
+/plugin marketplace add ali5ter/claude-plugins
+/plugin install pair-programmer@ali5ter
+```
 
 ## Usage
-
-### Verify Installation
-
-Check that the agent installed successfully:
-
-```bash
-ls -l ~/.claude/agents/
-```
-
-You should see `pair-programmer.md` listed.
 
 ### Starting a Session
 
 Launch Claude Code with the pair-programmer agent:
 
 ```bash
-claude --agent pair-programmer
+claude --agent pair-programmer:coach
 ```
 
 ### Declaring Your Level
@@ -175,22 +170,22 @@ Start your first message by declaring your assistance level:
 
 ```text
 # Level 1: Pure architecture/advisory
-$ claude --agent pair-programmer
+$ claude --agent pair-programmer:coach
 "Level 1: I want to implement a rate limiter myself."
 "Just advise on algorithm choices."
 
 # Level 2: Scaffolding
-$ claude --agent pair-programmer
+$ claude --agent pair-programmer:coach
 "Level 2: Scaffold an API client class for GitHub."
 "I'll implement the request methods."
 
 # Level 3: Pair programming
-$ claude --agent pair-programmer
+$ claude --agent pair-programmer:coach
 "Level 3: Let's alternate building a CLI tool."
 "I'll start with argument parsing."
 
 # Level 4: Full generation (sparingly)
-$ claude --agent pair-programmer
+$ claude --agent pair-programmer:coach
 "Level 4: Generate standard Express middleware boilerplate."
 ```
 
@@ -200,12 +195,6 @@ Return to default Claude Code (no agent):
 
 ```bash
 claude
-```
-
-List available agents:
-
-```bash
-ls ~/.claude/agents/
 ```
 
 ### Mid-Session Level Changes
@@ -230,13 +219,17 @@ The agent will confirm the change and reset state tracking.
 
 This framework is built on several principles:
 
-**Cognitive load is necessary.** If coding feels effortless, you're probably atrophying. Good collaboration should be mentally demanding.
+**Cognitive load is necessary.** If coding feels effortless, you're probably atrophying. Good collaboration should be mentally
+demanding.
 
-**Understanding > Shipping.** Better to ship slightly slower while maintaining deep knowledge of your codebase than to become a prompt engineer who can't debug their own code.
+**Understanding > Shipping.** Better to ship slightly slower while maintaining deep knowledge of your codebase than to become
+a prompt engineer who can't debug their own code.
 
-**AI as a tool, not a replacement.** Use AI like you use a debugger, profiler, or code review - as a specialist that augments your capabilities, not replaces your thinking.
+**AI as a tool, not a replacement.** Use AI like you use a debugger, profiler, or code review - as a specialist that augments
+your capabilities, not replaces your thinking.
 
-**Graduated resistance training.** Choose the level that maintains appropriate challenge. Too easy and you atrophy; too hard and you burn out.
+**Graduated resistance training.** Choose the level that maintains appropriate challenge. Too easy and you atrophy;
+too hard and you burn out.
 
 ---
 

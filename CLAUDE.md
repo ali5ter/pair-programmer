@@ -2,11 +2,13 @@
 
 ## Purpose
 
-Create a Claude agent that enforces graduated assistance to prevent skill atrophy when coding with AI. Based on MIT professor Roberto Rigobon's neuroplasticity concerns: "When we stop using our brains... we forget."
+Create a Claude agent that enforces graduated assistance to prevent skill atrophy when coding with AI. Based on MIT professor
+Roberto Rigobon's neuroplasticity concerns: "When we stop using our brains... we forget."
 
 ## The Problem
 
-"Vibe coding" with AI can create deceptive productivity while atrophying problem-solving skills. Need structured collaboration that maintains cognitive load.
+"Vibe coding" with AI can create deceptive productivity while atrophying problem-solving skills. Need structured collaboration
+that maintains cognitive load.
 
 ## Solution: Graduated Assistance Framework
 
@@ -94,15 +96,17 @@ Note these are Alister's preferences:
 
 ## Project Structure (Minimal)
 
-```
+```text
 pair-programmer/
-├── agent/
-│   └── pair-programmer.md    # Agent definition (487 lines)
+├── agents/
+│   └── coach.md              # Agent definition (agent ID: pair-programmer:coach)
+├── .claude-plugin/
+│   └── plugin.json           # Plugin manifest (name, version, description)
 ├── lib/
 │   └── pfb/                  # Bash utility library (git submodule)
 ├── CLAUDE.md                 # This file - development context
 ├── README.md                 # User-facing philosophy & usage
-└── install                   # Install script (installs agent to ~/.claude/agents/)
+└── install                   # Deprecation notice (replaced by plugin system)
 ```
 
 Add complexity only when proven necessary. Current structure is minimal and functional.
@@ -128,10 +132,18 @@ If a level can not be determined, ask the User how they want to engage using thi
 
 ## Current Status
 
-**Phase:** Complete (Testing Successful)
+**Phase:** Complete (Plugin Framework Migration)
 
 **Completed:**
-- Agent definition created at `agent/pair-programmer.md` (487 lines with full enforcement logic)
+
+- Migrated to Claude Code plugin framework (`pair-programmer` plugin, `coach` agent)
+- Agent ID: `pair-programmer:coach` (was `pair-programmer`)
+- Agent moved: `agent/pair-programmer.md` → `agents/coach.md`
+- Added `.claude-plugin/plugin.json`
+- Added to `ali5ter/claude-plugins` marketplace
+- `install` script replaced with deprecation notice
+- Install: `/plugin marketplace add ali5ter/claude-plugins` then `/plugin install pair-programmer@ali5ter`
+- Agent definition created at `agents/coach.md` (full enforcement logic)
 - README.md written with philosophy, usage patterns, and examples
 - Install script created and tested (`./install` → `~/.claude/agents/pair-programmer.md`)
 - Project structure finalized with pfb submodule for bash utilities
@@ -146,17 +158,23 @@ If a level can not be determined, ask the User how they want to engage using thi
 
 All four scenarios tested and validated:
 
-1. **Level Detection Test** - Agent correctly prompts user to declare level when none specified. Explains framework and requests explicit declaration.
+1. **Level Detection Test** - Agent correctly prompts user to declare level when none specified. Explains framework and
+   requests explicit declaration.
 
-2. **Level 1 Advisory Mode Test** - Agent properly refuses to write code. Provides architectural advice, design patterns, tradeoffs only. Enforcement working correctly.
+2. **Level 1 Advisory Mode Test** - Agent properly refuses to write code. Provides architectural advice, design patterns,
+   tradeoffs only. Enforcement working correctly.
 
-3. **Level 2 Scaffolding Test** - Agent provides class structure with method signatures and TODO markers but no implementation logic. Successfully delivers scaffolding requiring human logic implementation.
+3. **Level 2 Scaffolding Test** - Agent provides class structure with method signatures and TODO markers but no implementation
+   logic. Successfully delivers scaffolding requiring human logic implementation.
 
-4. **Level 4 Explain-Back Test** - Initial test revealed weakness where agent offered file creation before explain-back. Strengthened enforcement with CRITICAL labels and explicit blocking. Retest confirmed proper blocking until user demonstrates understanding.
+4. **Level 4 Explain-Back Test** - Initial test revealed weakness where agent offered file creation before explain-back.
+   Strengthened enforcement with CRITICAL labels and explicit blocking. Retest confirmed proper blocking until user demonstrates
+   understanding.
 
 **Critical Discovery - Agent Definition Format:**
 
-The `description` field in agent definition is meta-documentation that instructs the MAIN Claude Code agent when/how to invoke the subagent:
+The `description` field in agent definition is meta-documentation that instructs the MAIN Claude Code agent when/how to
+invoke the subagent:
 
 - Must be quoted multiline string with explicit escaped newlines (`\n\n`)
 - Must include `<example>` blocks showing invocation patterns via Task tool
@@ -168,17 +186,16 @@ This understanding was the breakthrough that enabled auto-invocation.
 **Installation Verification:**
 
 Both invocation methods confirmed working:
-- Direct launch: `claude --agent pair-programmer` (entire session in agent mode)
+
+- Direct launch: `claude --agent pair-programmer:coach` (entire session in agent mode)
 - Auto-launch: Main Claude recognizes patterns like "Level 2: scaffold X" and launches automatically
 
 ## Next Steps
 
-1. **Create Public GitHub Repository:** Set up public repo for community access and contributions.
-2. **Configure Git Remote:** Add remote origin and push committed code to GitHub.
-3. **Add GitHub Documentation:** Consider CONTRIBUTING.md, enhanced LICENSE details if needed.
-4. **Community Release:** Share agent for broader testing and feedback.
-5. **Monitor Usage Patterns:** Gather real-world usage data to inform future iterations.
-6. **Agent Directory Submission:** If Anthropic maintains an agent directory/marketplace, consider submission.
+1. **Push to GitHub:** Commit and push to <https://github.com/ali5ter/pair-programmer> to make plugin installable.
+2. **Update Marketplace Cache:** Run `/plugin marketplace update ali5ter` in Claude Code after pushing.
+3. **Verify Plugin Install:** Test `plugin install pair-programmer@ali5ter` end-to-end.
+4. **Monitor Usage Patterns:** Gather real-world usage data to inform future iterations.
 
 ## Notes
 
