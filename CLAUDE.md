@@ -132,72 +132,52 @@ If a level can not be determined, ask the User how they want to engage using thi
 
 ## Current Status
 
-**Phase:** Complete (Plugin Framework Migration — v1.0.0 Released)
+**Phase:** Complete (v1.1.0 Released — 2026-04-03)
 
-**Completed:**
+**v1.0.0 — Plugin Framework Migration:**
 
 - Migrated to Claude Code plugin framework (`pair-programmer` plugin, `coach` agent)
-- Agent ID: `pair-programmer:coach` (was `pair-programmer`)
-- Agent file: `agents/coach.md` (plugin convention)
-- Added `.claude-plugin/plugin.json` (name: `pair-programmer`, version: `1.0.0`)
-- Added `.markdownlint.json`
+- Agent ID: `pair-programmer:coach`; agent file: `agents/coach.md`
+- Added `.claude-plugin/plugin.json`, `.markdownlint.json`
 - Added to `ali5ter/claude-plugins` marketplace
-- `install` script replaced with deprecation notice
-- Both `ali5ter/pair-programmer` and `ali5ter/claude-plugins` repos committed and pushed
-- GitHub release v1.0.0 tagged: <https://github.com/ali5ter/pair-programmer/releases/tag/v1.0.0>
-- Install: `/plugin marketplace add ali5ter/claude-plugins` then `/plugin install pair-programmer@ali5ter`
-- Agent definition created at `agents/coach.md` (full enforcement logic)
-- README.md written with philosophy, usage patterns, and examples
-- Install script created and tested (`./install` → `~/.claude/agents/pair-programmer.md`)
-- Project structure finalized with pfb submodule for bash utilities
 - All four levels fully defined with enforcement rules and response patterns
-- Session state tracking implemented (current_level, turn_owner, ai_code_blocks_count, explain_back_pending)
-- **Testing completed successfully across all four levels**
-- **Agent definition format fixed** (multiline description with escaped newlines and example blocks)
-- **Level 4 explain-back enforcement strengthened** (blocks file operations until user demonstrates understanding)
-- **Auto-invocation verified** (main Claude recognizes trigger patterns and launches via Task tool)
+- Session state tracking implemented
+- Testing completed across all four levels
+- GitHub release v1.0.0: <https://github.com/ali5ter/pair-programmer/releases/tag/v1.0.0>
 
-**Testing Results (2026-01-08):**
+**v1.1.0 — Agent Quality Pass (2026-04-03):**
 
-All four scenarios tested and validated:
+All 11 open GitHub issues resolved across four grouped PRs:
 
-1. **Level Detection Test** - Agent correctly prompts user to declare level when none specified. Explains framework and
-   requests explicit declaration.
+- **#1, #3 (PR #12):** Fixed typo "refering" → "referring"; updated `description` examples to use
+  current delegation language (no "Task tool" narration) and consistent `pair-programmer:coach` agent ID
+- **#7, #9 (PR #13):** Added quantitative Level 3 substantive-modification rubric; generalised
+  Alister-specific content (experience-level inference, simplicity as a question not a mandate,
+  language-agnostic tool preferences)
+- **#2, #8, #10 (PR #14):** Added name-elicitation step to initialization flow; added Session Wrap-up
+  retrospective section; added `maxTurns: 40` frontmatter field
+- **#4, #5, #6, #11 (PR #15):** Added `tools: Read, Glob, Grep, Bash` (least privilege); added
+  `memory: user` with guidance on what to persist; added `initialPrompt` for automatic greeting and
+  level declaration; enriched `plugin.json` with agents manifest and `minVersion: 2.0.0`
 
-2. **Level 1 Advisory Mode Test** - Agent properly refuses to write code. Provides architectural advice, design patterns,
-   tradeoffs only. Enforcement working correctly.
+**Agent definition format note:**
 
-3. **Level 2 Scaffolding Test** - Agent provides class structure with method signatures and TODO markers but no implementation
-   logic. Successfully delivers scaffolding requiring human logic implementation.
+The `description` field is meta-documentation for the main Claude Code instance. It must be a quoted
+single-line string with `\n\n` escaped newlines and `<example>` blocks. Examples should model current
+delegation language — no "Task tool" narration. The examples are pattern-recognition training data,
+not just docs.
 
-4. **Level 4 Explain-Back Test** - Initial test revealed weakness where agent offered file creation before explain-back.
-   Strengthened enforcement with CRITICAL labels and explicit blocking. Retest confirmed proper blocking until user demonstrates
-   understanding.
+**Invocation methods:**
 
-**Critical Discovery - Agent Definition Format:**
+- Direct launch: `claude --agent pair-programmer:coach` — agent greets automatically via `initialPrompt`
+- Auto-delegation: Main Claude recognises level declarations and delegates to `pair-programmer:coach`
 
-The `description` field in agent definition is meta-documentation that instructs the MAIN Claude Code agent when/how to
-invoke the subagent:
-
-- Must be quoted multiline string with explicit escaped newlines (`\n\n`)
-- Must include `<example>` blocks showing invocation patterns via Task tool
-- Not just documentation - it's training data for pattern recognition
-- Without proper format, agent remains invisible to main system
-
-This understanding was the breakthrough that enabled auto-invocation.
-
-**Installation Verification:**
-
-Both invocation methods confirmed working:
-
-- Direct launch: `claude --agent pair-programmer:coach` (entire session in agent mode)
-- Auto-launch: Main Claude recognizes patterns like "Level 2: scaffold X" and launches automatically
-
-## Next Steps
+## Next Steps (Ongoing)
 
 1. **Monitor Usage Patterns:** Gather real-world usage data to inform future iterations.
 2. **Watch Plugin Framework Updates:** Adapt to any Anthropic plugin framework changes.
-3. **Evaluate Additional Agents:** Consider whether a `reviewer` or other role agent adds value under the `pair-programmer` plugin namespace.
+3. **Evaluate Additional Agents:** Consider whether a `reviewer` or other role agent adds value under the
+   `pair-programmer` plugin namespace.
 4. **Agent Directory Submission:** If Anthropic publishes an official plugin/agent directory, consider submitting.
 
 ## Notes

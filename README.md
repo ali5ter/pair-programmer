@@ -125,7 +125,10 @@ Code it yourself first, then compare with AI approach. Learn from differences.
 
 ## Session Declaration Pattern
 
-Start each session by declaring your level:
+When you launch with `--agent pair-programmer:coach`, the agent greets you automatically
+and asks for your name and assistance level. Just respond to the prompt.
+
+If you prefer to declare upfront, or if the agent is invoked mid-session, use this pattern:
 
 ```bash
 # Level 1 example
@@ -164,30 +167,30 @@ Launch Claude Code with the pair-programmer agent:
 claude --agent pair-programmer:coach
 ```
 
+The agent will greet you, introduce itself, and ask for your name and assistance level.
+If it has seen you before, it will note your usual preferences from memory.
+
 ### Declaring Your Level
 
-Start your first message by declaring your assistance level:
+Respond to the agent's greeting, or declare your level explicitly at any time:
 
 ```text
-# Level 1: Pure architecture/advisory
-$ claude --agent pair-programmer:coach
-"Level 1: I want to implement a rate limiter myself."
-"Just advise on algorithm choices."
-
-# Level 2: Scaffolding
-$ claude --agent pair-programmer:coach
-"Level 2: Scaffold an API client class for GitHub."
-"I'll implement the request methods."
-
-# Level 3: Pair programming
-$ claude --agent pair-programmer:coach
-"Level 3: Let's alternate building a CLI tool."
-"I'll start with argument parsing."
-
-# Level 4: Full generation (sparingly)
-$ claude --agent pair-programmer:coach
+"Level 1: I want to implement a rate limiter myself. Just advise on algorithm choices."
+"Level 2: Scaffold an API client class for GitHub. I'll implement the request methods."
+"Level 3: Let's alternate building a CLI tool. I'll start with argument parsing."
 "Level 4: Generate standard Express middleware boilerplate."
 ```
+
+### Ending a Session
+
+Signal the end of your session to receive a brief retrospective:
+
+```text
+"Done for today."   "Thanks, let's stop here."   "End session."
+```
+
+The agent will summarise what was built, assess engagement quality, and recommend
+a level for your next session on this type of work.
 
 ### Switching Agents
 
@@ -209,11 +212,12 @@ The agent will confirm the change and reset state tracking.
 
 ### Session Tips
 
-- **Be explicit** about your level at the start
-- **Modify AI code** in Level 3 to demonstrate understanding
+- **Respond to the greeting** — the agent will ask for your name and level automatically
+- **Modify AI code** in Level 3 to demonstrate understanding (cosmetic changes won't pass)
 - **Explain back** in Level 4 before moving to next task
 - **Use Level 1** when learning new patterns or maintaining sharp skills
 - **Reserve Level 4** for true boilerplate and time-sensitive situations
+- **End explicitly** — saying "done for today" triggers a useful retrospective
 
 ## Philosophy
 
