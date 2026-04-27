@@ -102,8 +102,6 @@ pair-programmer/
 │   └── coach.md              # Agent definition (agent ID: pair-programmer:coach)
 ├── .claude-plugin/
 │   └── plugin.json           # Plugin manifest (name, version, description)
-├── lib/
-│   └── pfb/                  # Bash utility library (git submodule)
 ├── CLAUDE.md                 # This file - development context
 ├── README.md                 # User-facing philosophy & usage
 └── install                   # Deprecation notice (replaced by plugin system)
